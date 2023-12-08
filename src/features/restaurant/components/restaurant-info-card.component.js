@@ -1,18 +1,31 @@
 import React from "react";
 import { Card, Text } from "react-native-paper";
-import { spacing } from "../../../utils/sizes";
-import { StyleSheet } from "react-native";
 import styled from "styled-components";
+import { View } from "react-native";
+import { SvgXml } from "react-native-svg";
+import star from "../../../../assets/star";
 
 const Title = styled(Text)`
-  padding-top: 8px;
+  font-family: ${(props) => props.theme.fonts.heading};
+  font-size: ${(props) => props.theme.fontSizes.body};
+`;
+const Address = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.body};
+  font-size: ${(props) => props.theme.fontSizes.caption};
 `;
 
-const RestaurantCardCover = styled(Card.Cover)`
-`;
+const RestaurantCardCover = styled(Card.Cover)``;
 
 const RestaurantCard = styled(Card)``;
 const RestaurantCardContent = styled(Card.Content)``;
+const Info = styled(View)`
+  padding-top: ${(props) => props.theme.space[2]};
+`;
+const Rating = styled(View)`
+  padding-top: ${(props) => props.theme.space[1]};
+  padding-top: ${(props) => props.theme.space[1]};
+  flex-direction: row;
+`;
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
@@ -27,14 +40,22 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     isClosedTemprorily,
   } = restaurant;
 
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
+
   return (
     <RestaurantCard elevation={5}>
       <RestaurantCardContent>
         <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
-        <Title variant="titleLarge">{name}</Title>
-        {/* <Text variant="bodyMedium">{address}</Text> */}
+        <Info>
+          <Title>{name}</Title>
+          <Rating>
+            {ratingArray.map(() => (
+              <SvgXml xml={star} width={20} height={20} />
+            ))}
+          </Rating>
+          <Address>{address}</Address>
+        </Info>
       </RestaurantCardContent>
     </RestaurantCard>
   );
 };
-
