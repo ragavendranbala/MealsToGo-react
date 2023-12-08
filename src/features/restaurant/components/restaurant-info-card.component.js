@@ -4,11 +4,16 @@ import { spacing } from "../../../utils/sizes";
 import { StyleSheet } from "react-native";
 import styled from "styled-components";
 
-const Title = styled.Text`
-  paddingTop: 8px;
-  fontWeight: bold;
-  fontSize:16px
+const Title = styled(Text)`
+  padding-top: 8px;
 `;
+
+const RestaurantCardCover = styled(Card.Cover)`
+`;
+
+const RestaurantCard = styled(Card)``;
+const RestaurantCardContent = styled(Card.Content)``;
+
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "RK Hotels!",
@@ -23,21 +28,13 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
   } = restaurant;
 
   return (
-    <Card elevation={5}>
-      <Card.Content>
-        <Card.Cover key={name} source={{ uri: photos[0] }} />
-        <Title>{name}</Title>
-        {/* <Text variant="titleLarge" style={styles.title}>
-          {name}
-        </Text> */}
+    <RestaurantCard elevation={5}>
+      <RestaurantCardContent>
+        <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+        <Title variant="titleLarge">{name}</Title>
         {/* <Text variant="bodyMedium">{address}</Text> */}
-      </Card.Content>
-    </Card>
+      </RestaurantCardContent>
+    </RestaurantCard>
   );
 };
 
-const styles = StyleSheet.create({
-  title: {
-    paddingTop: spacing.sm,
-  },
-});
